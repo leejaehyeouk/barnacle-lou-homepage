@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --lou-yellow: #F0A820;
+  --lou-yellow-light: #FFF0C8;
+  --bella-pink: #E8607A;
+  --bella-pink-light: #FFE4EC;
+  --kruru-blue: #6E8EC8;
+  --kruru-blue-light: #E4EEF8;
+  --jambo-green: #5BC870;
+  --bg-cream: #FBF6EE;
+  --bg-mint: #E8F5EF;
+  --text-warm: #3D2B1F;
+  --text-muted: #9B7E6A;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  background-color: var(--bg-cream);
+  color: var(--text-warm);
+  margin: 0;
+  padding: 0;
+  line-height: 1.7;
+  letter-spacing: -0.01em;
+}
+
+/* ── 폰트 유틸리티 ── */
+@layer components {
+  /* Jua: 둥글고 귀여운 타이틀용 */
+  .font-jua {
+    font-family: 'Jua', 'Noto Sans KR', sans-serif;
+    letter-spacing: -0.01em;
+  }
+
+  /* Nanum Pen Script: 로고·브랜드 감성 액센트 */
+  .font-pen {
+    font-family: 'Nanum Pen Script', cursive;
+    letter-spacing: 0.02em;
+  }
+
+  /* Noto Sans KR: 깔끔한 본문 */
+  .font-body {
+    font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  }
+
+  /* ── 타이포그래피 프리셋 ── */
+
+  /* 히어로 메인 타이틀 */
+  .text-display {
+    font-family: 'Jua', 'Noto Sans KR', sans-serif;
+    font-size: clamp(2.4rem, 6vw, 5rem);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--text-warm);
+  }
+
+  /* 섹션 제목 */
+  .text-heading {
+    font-family: 'Jua', 'Noto Sans KR', sans-serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    color: var(--text-warm);
+  }
+
+  /* 서브 제목 */
+  .text-subheading {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+  }
+
+  /* 본문 */
+  .text-body {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
+    font-weight: 400;
+    line-height: 1.8;
+    letter-spacing: -0.01em;
+    color: var(--text-warm);
+  }
+
+  /* 캡션/서브 텍스트 */
+  .text-caption {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+
+  /* 버튼 텍스트 */
+  .text-btn {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  /* 뱃지 텍스트 */
+  .text-badge {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* ── 공통 컴포넌트 ── */
+  .btn-primary {
+    @apply text-white font-bold py-3 px-6 rounded-full transition-all duration-200 active:scale-95;
+    background-color: var(--lou-yellow);
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+  }
+
+  /* 텍스트 그림자 — 배경 위 가독성 */
+  .text-shadow-warm {
+    text-shadow: 0 2px 8px rgba(61, 43, 31, 0.12);
+  }
+
+  .text-shadow-white {
+    text-shadow: 2px 2px 0px rgba(255,255,255,0.9), 0 4px 12px rgba(255,255,255,0.5);
+  }
+}
+
+/* ── 링크 기본 스타일 ── */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ── 입력 폼 폰트 상속 ── */
+input, textarea, select, button {
+  font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+/* ── 커스텀 스크롤바 ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-cream); }
+::-webkit-scrollbar-thumb { background: var(--lou-yellow); border-radius: 3px; }
+
+/* ── 선택 영역 컬러 ── */
+::selection {
+  background: var(--lou-yellow-light);
+  color: var(--text-warm);
+}
