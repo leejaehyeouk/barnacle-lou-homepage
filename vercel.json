@@ -9,6 +9,9 @@
     },
     "api/contact.js": {
       "maxDuration": 10
+    },
+    "api/youtube.js": {
+      "maxDuration": 10
     }
   }
 }
