@@ -22,11 +22,15 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: '필수 항목이 누락되었습니다.' })
   }
 
+  if (!process.env.RESEND_API_KEY) {
+    return res.status(500).json({ error: 'RESEND_API_KEY 환경변수가 설정되지 않았습니다.' })
+  }
+
   try {
     const resend = new Resend(process.env.RESEND_API_KEY)
     const typeLabel = TYPE_LABELS[type] || type
 
-    await resend.emails.send({
+    const { data, error: resendError } = await resend.emails.send({
       from: 'onboarding@resend.dev',
       to: process.env.CONTACT_EMAIL || 'LEE_JAEHYEOUK@eland.co.kr',
       reply_to: email,
@@ -65,9 +69,14 @@ export default async function handler(req, res) {
       `,
     })
 
-    return res.status(200).json({ success: true })
+    if (resendError) {
+      console.error('[contact api] Resend 오류:', JSON.stringify(resendError))
+      return res.status(500).json({ error: `메일 전송 실패: ${resendError.message || JSON.stringify(resendError)}` })
+    }
+
+    return res.status(200).json({ success: true, id: data?.id })
   } catch (error) {
-    console.error('[contact api] 메일 전송 오류:', error.message)
+    console.error('[contact api] 메일 전송 예외:', error.message)
     return res.status(500).json({ error: '메일 전송에 실패했습니다. 잠시 후 다시 시도해주세요.' })
   }
 }
