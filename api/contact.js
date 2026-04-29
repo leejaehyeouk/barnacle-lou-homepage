@@ -77,44 +77,8 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: `메일 전송 실패: ${adminError.message || JSON.stringify(adminError)}` })
     }
 
-    // 2. 문의자에게 접수 확인 메일
-    await resend.emails.send({
-      from: 'onboarding@resend.dev',
-      to: email,
-      subject: `[따개비루] 문의가 정상적으로 접수되었습니다.`,
-      html: `
-        <div style="font-family:'Apple SD Gothic Neo',Arial,sans-serif;max-width:600px;margin:0 auto;background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #eee;">
-          <div style="background:#F0A820;padding:24px 32px;">
-            <h1 style="margin:0;color:#fff;font-size:20px;">문의가 접수되었습니다</h1>
-          </div>
-          <div style="padding:32px;">
-            <p style="margin:0 0 20px;font-size:15px;color:#3D2B1F;line-height:1.7;">안녕하세요, <strong>${name}</strong>님.<br>따개비루에 문의해 주셔서 감사합니다.<br>아래 내용으로 문의가 정상적으로 접수되었으며, 담당자 검토 후 빠르게 연락드리겠습니다.</p>
-            <table style="width:100%;border-collapse:collapse;margin-bottom:24px;">
-              <tr>
-                <td style="padding:10px 14px;background:#FFF0C8;font-weight:bold;font-size:13px;width:110px;">문의 유형</td>
-                <td style="padding:10px 14px;font-size:13px;border-bottom:1px solid #f0f0f0;">${typeLabel}</td>
-              </tr>
-              <tr>
-                <td style="padding:10px 14px;background:#FFF0C8;font-weight:bold;font-size:13px;">이름 / 회사</td>
-                <td style="padding:10px 14px;font-size:13px;border-bottom:1px solid #f0f0f0;">${name}</td>
-              </tr>
-              <tr>
-                <td style="padding:10px 14px;background:#FFF0C8;font-weight:bold;font-size:13px;">연락처</td>
-                <td style="padding:10px 14px;font-size:13px;border-bottom:1px solid #f0f0f0;">${phone || '-'}</td>
-              </tr>
-            </table>
-            <div style="background:#FBF6EE;border-left:4px solid #F0A820;padding:16px 20px;border-radius:0 8px 8px 0;">
-              <p style="margin:0 0 8px;font-weight:bold;font-size:13px;color:#3D2B1F;">문의 내용</p>
-              <p style="margin:0;font-size:13px;color:#5a4a3a;white-space:pre-wrap;line-height:1.7;">${safeMessage}</p>
-            </div>
-            <p style="margin:28px 0 0;font-size:12px;color:#9B7E6A;line-height:1.8;">* 본 메일은 자동 발송 메일로 회신이 불가합니다.<br>* 추가 문의는 홈페이지 문의 폼을 이용해 주세요.</p>
-          </div>
-          <div style="background:#FFF8E7;padding:16px 32px;text-align:center;">
-            <p style="margin:0;font-size:12px;color:#C8943A;">따개비루 · Barnacle Lou</p>
-          </div>
-        </div>
-      `,
-    })
+    // TODO: 도메인 인증 후 문의자 확인 메일 발송 기능 활성화 예정
+    // (Resend 무료 플랜은 인증된 도메인 없이 외부 이메일 발송 불가)
 
     return res.status(200).json({ success: true })
   } catch (error) {
