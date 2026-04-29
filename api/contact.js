@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer'
+import { Resend } from 'resend'
 
 const TYPE_LABELS = {
   licensing: 'IP 라이센싱',
@@ -23,22 +23,13 @@ export default async function handler(req, res) {
   }
 
   try {
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT) || 587,
-      secure: process.env.SMTP_SECURE === 'true',
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    })
-
+    const resend = new Resend(process.env.RESEND_API_KEY)
     const typeLabel = TYPE_LABELS[type] || type
 
-    await transporter.sendMail({
-      from: `"따개비루 홈페이지" <${process.env.SMTP_USER}>`,
+    await resend.emails.send({
+      from: 'onboarding@resend.dev',
       to: process.env.CONTACT_EMAIL || 'LEE_JAEHYEOUK@eland.co.kr',
-      replyTo: email,
+      reply_to: email,
       subject: `[따개비루] ${typeLabel} 문의 - ${name}`,
       html: `
         <div style="font-family:'Apple SD Gothic Neo',Arial,sans-serif;max-width:600px;margin:0 auto;background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #eee;">
@@ -48,7 +39,7 @@ export default async function handler(req, res) {
           <div style="padding:32px;">
             <table style="width:100%;border-collapse:collapse;margin-bottom:24px;">
               <tr>
-                <td style="padding:10px 14px;background:#FFF0C8;font-weight:bold;font-size:13px;width:110px;border-radius:4px 0 0 4px;">이름 / 회사</td>
+                <td style="padding:10px 14px;background:#FFF0C8;font-weight:bold;font-size:13px;width:110px;">이름 / 회사</td>
                 <td style="padding:10px 14px;font-size:13px;border-bottom:1px solid #f0f0f0;">${name}</td>
               </tr>
               <tr>
@@ -64,11 +55,11 @@ export default async function handler(req, res) {
                 <td style="padding:10px 14px;font-size:13px;">${typeLabel}</td>
               </tr>
             </table>
-            <div style="background:#FBF6EE;border-left:4px solid #F0A820;border-radius:0 8px 8px 0;padding:16px 20px;">
+            <div style="background:#FBF6EE;border-left:4px solid #F0A820;padding:16px 20px;border-radius:0 8px 8px 0;">
               <p style="margin:0 0 8px;font-weight:bold;font-size:13px;color:#3D2B1F;">문의 내용</p>
               <p style="margin:0;font-size:13px;color:#5a4a3a;white-space:pre-wrap;line-height:1.7;">${message.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
             </div>
-            <p style="margin:24px 0 0;font-size:11px;color:#9B7E6A;">* 이 메일은 따개비루 홈페이지(olivelou.com)에서 자동 발송되었습니다.</p>
+            <p style="margin:24px 0 0;font-size:11px;color:#9B7E6A;">* 이 메일은 따개비루 홈페이지에서 자동 발송되었습니다.</p>
           </div>
         </div>
       `,
