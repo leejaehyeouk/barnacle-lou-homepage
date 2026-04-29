@@ -3,84 +3,113 @@ import { motion } from 'framer-motion'
 import Toast from '../components/Toast'
 import FooterSection from '../sections/FooterSection'
 
-const EMAIL_ICON = '\uD83D\uDCE7'
-const CAMERA_ICON = '\uD83D\uDCF8'
-const PLAY_ICON = '\u25B6\uFE0F'
+/* ── 브랜드 SVG 아이콘 ── */
+function EmailIcon() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="28" height="28" rx="6" fill="#EA4335" />
+      <path d="M6 9h16v12H6z" fill="#fff" opacity="0.15" />
+      <rect x="6" y="9" width="16" height="12" rx="1.5" stroke="#fff" strokeWidth="1.4" fill="none" />
+      <path d="M6 9.5l8 6 8-6" stroke="#fff" strokeWidth="1.4" strokeLinecap="round" fill="none" />
+    </svg>
+  )
+}
 
-const LABELS = {
-  email: '\uc774\uba54\uc77c',
-  instagram: 'Instagram',
-  youtube: 'YouTube',
+function InstagramIcon() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="ig-bg" cx="30%" cy="110%" r="140%">
+          <stop offset="0%" stopColor="#fdf497" />
+          <stop offset="10%" stopColor="#fdf497" />
+          <stop offset="40%" stopColor="#fd5949" />
+          <stop offset="65%" stopColor="#d6249f" />
+          <stop offset="100%" stopColor="#285AEB" />
+        </radialGradient>
+      </defs>
+      <rect width="28" height="28" rx="7" fill="url(#ig-bg)" />
+      <rect x="7" y="7" width="14" height="14" rx="4" stroke="#fff" strokeWidth="1.5" fill="none" />
+      <circle cx="14" cy="14" r="3.5" stroke="#fff" strokeWidth="1.5" fill="none" />
+      <circle cx="19" cy="9" r="1.1" fill="#fff" />
+    </svg>
+  )
+}
+
+function YouTubeIcon() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="28" height="28" rx="6" fill="#FF0000" />
+      <path d="M11.5 10.5l7 3.5-7 3.5V10.5z" fill="#fff" />
+    </svg>
+  )
 }
 
 const contactInfo = [
   {
-    icon: EMAIL_ICON,
-    label: LABELS.email,
+    Icon: EmailIcon,
+    label: '이메일',
+    bgColor: '#FFF0C8',
     value: 'OLIVESTUDIO_COST@ELAND.CO.KR',
     href: 'mailto:OLIVESTUDIO_COST@ELAND.CO.KR',
   },
   {
-    icon: CAMERA_ICON,
-    label: LABELS.instagram,
+    Icon: InstagramIcon,
+    label: 'Instagram',
+    bgColor: '#FFF0F5',
     value: '@barnacle_lou',
     href: 'https://instagram.com/barnacle_lou',
   },
   {
-    icon: PLAY_ICON,
-    label: LABELS.youtube,
+    Icon: YouTubeIcon,
+    label: 'YouTube',
+    bgColor: '#FFF0F0',
     value: '@barnaclelou6561',
     href: 'https://www.youtube.com/@barnaclelou6561',
   },
 ]
 
-const TEXT = {
-  pageTitle: '\ubb38\uc758\ud558\uae30',
-  pageDesc: '\ub530\uac1c\ube44\ub8e8\uc5d0 \uad00\ud55c \ubaa8\ub4e0 \ubb38\uc758\ub97c \ub0a8\uacbc\uc8fc\uc138\uc694 \uD83D\uDC23',
-  contactInfoTitle: '\uc5f0\ub77d\uc815\ubcf4',
-  operationTitle: '\uc6b4\uc601 \uc2dc\uac04',
-  weekday: '\ud3c9\uc77c',
-  weekdayTime: '09:00 - 18:00',
-  lunch: '\uc810\uc2ec \uc2dc\uac04',
-  lunchTime: '12:00 - 13:00',
-  weekend: '\uc8fc\ub9d0\u00b7\uacf5\ud734\uc77c',
-  weekendTime: '\ud734\ubb34',
-  replyNote: '* \uc601\uc5c5\uc77c \uae30\uc900 3-5\uc77c \ub0b4 \ub2f5\ubcc0\ub4dc\ub9bd\ub2c8\ub2e4.',
-  detailInquiry: '\uc0c1\uc138 \ubb38\uc758',
-  nameLabel: '\uc774\ub984 / \ud68c\uc0ac',
-  namePlaceholder: '\ud64d\uae38\ub3d9',
-  emailLabel: '\uc774\uba54\uc77c',
-  phoneLabel: '\uc5f0\ub77d\ucc98',
-  typeLabel: '\ubb38\uc758 \uc720\ud615',
-  typeDefault: '\uc120\ud0dd\ud574\uc8fc\uc138\uc694',
-  typeLicensing: 'IP \ub77c\uc774\uc13c\uc2f1',
-  typeGoods: '\uad7f\uc988 \uc81c\uc791',
-  typeCollab: '\ube0c\ub79c\ub4dc \ucf5c\ub77c\ubcf4',
-  typeMedia: '\ubbf8\ub514\uc5b4\u00b7\ucd9c\ud310',
-  typeOther: '\uae30\ud0c0 \ubb38\uc758',
-  messageLabel: '\uc0c1\uc138 \ub0b4\uc6a9',
-  messagePlaceholder: '\ubb38\uc758 \ub0b4\uc6a9\uc744 \uc0c1\uc138\ud558\uac8c \uc801\uc5b4\uc8fc\uc138\uc694.',
-  fileLabel: '\ucca8\ubd80\ud30c\uc77c',
-  fileOptional: '(\uc120\ud0dd)',
-  fileGuide: '\uD83D\uDCCE \ud30c\uc77c\uc744 \ub4dc\ub798\uadf8\ud558\uac70\ub098 \ud074\ub9ad\ud574\uc11c \uc5c5\ub85c\ub4dc',
-  fileSize: 'PDF, JPG, PNG (\ucd5c\ub300 10MB)',
-  submitBtn: '\ubb38\uc758 \ubcf4\ub0b4\uae30 \uD83D\uDC23',
-  toastMsg: '\ubb38\uc758\uac00 \uc131\uacf5\uc801\uc73c\ub85c \uc811\uc218\ub418\uc5c8\uc5b4\uc694! \ube68\ub9ac \ub2f5\ubcc0\ub4dc\ub9b4\uac8c\uc694 \uD83D\uDC23',
-}
+const TYPE_OPTIONS = [
+  { value: '', label: '선택해주세요' },
+  { value: 'licensing', label: 'IP 라이센싱' },
+  { value: 'goods', label: '굿즈 제작' },
+  { value: 'collab', label: '브랜드 콜라보' },
+  { value: 'media', label: '미디어·출판' },
+  { value: 'other', label: '기타 문의' },
+]
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', type: '', message: '' })
-  const [toast, setToast] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [toast, setToast] = useState({ show: false, message: '', success: true })
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    setToast(true)
-    setForm({ name: '', email: '', phone: '', type: '', message: '' })
+    setSending(true)
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+      if (res.ok) {
+        setToast({ show: true, message: '문의가 성공적으로 접수되었어요! 빠르게 답변드릴게요.', success: true })
+        setForm({ name: '', email: '', phone: '', type: '', message: '' })
+      } else {
+        const data = await res.json()
+        setToast({ show: true, message: data.error || '전송에 실패했습니다. 다시 시도해주세요.', success: false })
+      }
+    } catch {
+      setToast({ show: true, message: '네트워크 오류가 발생했습니다. 다시 시도해주세요.', success: false })
+    } finally {
+      setSending(false)
+    }
   }
 
   return (
     <main className="pt-16">
+      {/* 헤더 */}
       <section
         className="py-16 text-center"
         style={{ background: 'linear-gradient(135deg, #FFF0C8 0%, #FFE4EC 100%)' }}
@@ -95,18 +124,20 @@ export default function Contact() {
             className="font-jua"
             style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', color: '#3D2B1F', letterSpacing: '-0.02em' }}
           >
-            {TEXT.pageTitle}
+            문의하기
           </h1>
           <p className="font-body text-muted text-base mt-3 font-medium">
-            {TEXT.pageDesc}
+            따개비루에 관한 모든 문의를 남겨주세요
           </p>
         </motion.div>
       </section>
 
+      {/* 본문 */}
       <section style={{ backgroundColor: '#FBF6EE' }} className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
 
+            {/* 왼쪽: 연락처 정보 */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -118,57 +149,61 @@ export default function Contact() {
                 className="font-jua"
                 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.2rem)', color: '#3D2B1F', letterSpacing: '-0.02em' }}
               >
-                {TEXT.contactInfoTitle}
+                연락처
               </h2>
 
-              {contactInfo.map((info) => (
+              {contactInfo.map(({ Icon, label, bgColor, value, href }) => (
                 <a
-                  key={info.label}
-                  href={info.href}
-                  target={info.href.startsWith('mailto') ? undefined : '_blank'}
+                  key={label}
+                  href={href}
+                  target={href.startsWith('mailto') ? undefined : '_blank'}
                   rel="noopener noreferrer"
                   className="flex items-center gap-4 bg-white rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow group"
                 >
                   <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0"
-                    style={{ backgroundColor: '#FFF0C8' }}
+                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                    style={{ backgroundColor: bgColor }}
                   >
-                    {info.icon}
+                    <Icon />
                   </div>
                   <div>
-                    <p className="font-body text-xs text-muted font-semibold">{info.label}</p>
+                    <p className="font-body text-xs text-muted font-semibold">{label}</p>
                     <p
                       className="font-body font-bold text-sm group-hover:text-lou transition-colors"
                       style={{ color: '#3D2B1F' }}
                     >
-                      {info.value}
+                      {value}
                     </p>
                   </div>
                 </a>
               ))}
 
+              {/* 운영 시간 */}
               <div className="bg-white rounded-2xl p-6 shadow-sm mt-2">
                 <p className="font-jua text-xl mb-4" style={{ color: '#F0A820', letterSpacing: '-0.01em' }}>
-                  {TEXT.operationTitle}
+                  운영 시간
                 </p>
                 <div className="space-y-3">
                   <div className="flex justify-between font-body text-sm">
-                    <span className="text-muted font-medium">{TEXT.weekday}</span>
-                    <span className="font-bold text-warm">{TEXT.weekdayTime}</span>
+                    <span className="text-muted font-medium">평일</span>
+                    <span className="font-bold text-warm">09:00 - 18:00</span>
                   </div>
                   <div className="flex justify-between font-body text-sm">
-                    <span className="text-muted font-medium">{TEXT.lunch}</span>
-                    <span className="font-bold text-warm">{TEXT.lunchTime}</span>
+                    <span className="text-muted font-medium">점심 시간</span>
+                    <span className="font-bold text-warm">12:00 - 13:00</span>
                   </div>
                   <div className="flex justify-between font-body text-sm">
-                    <span className="text-muted font-medium">{TEXT.weekend}</span>
-                    <span className="font-bold text-warm">{TEXT.weekendTime}</span>
+                    <span className="text-muted font-medium">주말·공휴일</span>
+                    <span className="font-bold text-warm">휴무</span>
                   </div>
                 </div>
-                <p className="font-body text-xs text-muted mt-4 font-medium">{TEXT.replyNote}</p>
+                <p className="font-body text-xs text-muted mt-4 font-medium">
+                  * 영업일 기준 3-5일 내 답변드립니다.
+                </p>
               </div>
             </motion.div>
 
+            {/* 오른쪽: 문의 폼 */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -179,7 +214,7 @@ export default function Contact() {
                 className="font-jua mb-6"
                 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.2rem)', color: '#3D2B1F', letterSpacing: '-0.02em' }}
               >
-                {TEXT.detailInquiry}
+                상세 문의
               </h2>
               <form
                 onSubmit={handleSubmit}
@@ -187,19 +222,19 @@ export default function Contact() {
               >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1.5">
-                    <label className="font-body text-sm font-bold text-warm">{TEXT.nameLabel}</label>
+                    <label className="font-body text-sm font-bold text-warm">이름 / 회사</label>
                     <input
                       type="text"
                       name="name"
                       value={form.name}
                       onChange={handleChange}
                       required
-                      placeholder={TEXT.namePlaceholder}
+                      placeholder="홍길동"
                       className="border border-gray-200 rounded-xl px-4 py-3 text-sm font-body outline-none focus:border-lou transition-colors"
                     />
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <label className="font-body text-sm font-bold text-warm">{TEXT.emailLabel}</label>
+                    <label className="font-body text-sm font-bold text-warm">이메일</label>
                     <input
                       type="email"
                       name="email"
@@ -212,7 +247,7 @@ export default function Contact() {
                   </div>
                 </div>
                 <div className="flex flex-col gap-1.5">
-                  <label className="font-body text-sm font-bold text-warm">{TEXT.phoneLabel}</label>
+                  <label className="font-body text-sm font-bold text-warm">연락처</label>
                   <input
                     type="tel"
                     name="phone"
@@ -223,7 +258,7 @@ export default function Contact() {
                   />
                 </div>
                 <div className="flex flex-col gap-1.5">
-                  <label className="font-body text-sm font-bold text-warm">{TEXT.typeLabel}</label>
+                  <label className="font-body text-sm font-bold text-warm">문의 유형</label>
                   <select
                     name="type"
                     value={form.type}
@@ -231,52 +266,46 @@ export default function Contact() {
                     required
                     className="border border-gray-200 rounded-xl px-4 py-3 text-sm font-body outline-none focus:border-lou transition-colors bg-white"
                   >
-                    <option value="">{TEXT.typeDefault}</option>
-                    <option value="licensing">{TEXT.typeLicensing}</option>
-                    <option value="goods">{TEXT.typeGoods}</option>
-                    <option value="collab">{TEXT.typeCollab}</option>
-                    <option value="media">{TEXT.typeMedia}</option>
-                    <option value="other">{TEXT.typeOther}</option>
+                    {TYPE_OPTIONS.map(({ value, label }) => (
+                      <option key={value} value={value}>{label}</option>
+                    ))}
                   </select>
                 </div>
                 <div className="flex flex-col gap-1.5">
-                  <label className="font-body text-sm font-bold text-warm">{TEXT.messageLabel}</label>
+                  <label className="font-body text-sm font-bold text-warm">상세 내용</label>
                   <textarea
                     name="message"
                     value={form.message}
                     onChange={handleChange}
                     required
                     rows={5}
-                    placeholder={TEXT.messagePlaceholder}
+                    placeholder="문의 내용을 상세하게 적어주세요."
                     className="border border-gray-200 rounded-xl px-4 py-3 text-sm font-body outline-none focus:border-lou transition-colors resize-none"
                   />
                 </div>
-                <div className="flex flex-col gap-1.5">
-                  <label className="font-body text-sm font-bold text-warm">
-                    {TEXT.fileLabel} <span className="text-muted font-normal">{TEXT.fileOptional}</span>
-                  </label>
-                  <div className="border-2 border-dashed border-gray-200 rounded-xl px-4 py-6 text-center cursor-pointer hover:border-lou transition-colors">
-                    <p className="font-body text-sm text-muted font-medium">{TEXT.fileGuide}</p>
-                    <p className="font-body text-xs text-muted mt-1">{TEXT.fileSize}</p>
-                  </div>
-                </div>
                 <motion.button
                   type="submit"
-                  whileHover={{ scale: 1.04 }}
-                  whileTap={{ scale: 0.96 }}
-                  className="font-body font-bold text-white py-3.5 rounded-full text-base shadow-md mt-2"
-                  style={{ backgroundColor: '#F0A820' }}
+                  disabled={sending}
+                  whileHover={{ scale: sending ? 1 : 1.04 }}
+                  whileTap={{ scale: sending ? 1 : 0.96 }}
+                  className="font-body font-bold text-white py-3.5 rounded-full text-base shadow-md mt-2 transition-opacity"
+                  style={{ backgroundColor: sending ? '#ccc' : '#F0A820' }}
                 >
-                  {TEXT.submitBtn}
+                  {sending ? '전송 중...' : '문의 보내기'}
                 </motion.button>
               </form>
             </motion.div>
+
           </div>
         </div>
       </section>
 
       <FooterSection />
-      <Toast message={TEXT.toastMsg} show={toast} onClose={() => setToast(false)} />
+      <Toast
+        message={toast.message}
+        show={toast.show}
+        onClose={() => setToast((t) => ({ ...t, show: false }))}
+      />
     </main>
   )
 }

@@ -231,8 +231,8 @@ const heroChars = [
 ]
 
 const sizeMap = {
-  medium: { circle: 120, emoji: '3.5rem', img: 'w-28 h-28 md:w-36 md:h-36' },
-  large: { circle: 156, emoji: '4.5rem', img: 'w-40 h-40 md:w-48 md:h-48' },
+  medium: { circle: 120, emoji: '3.5rem', img: 'w-full h-full' },
+  large: { circle: 156, emoji: '4.5rem', img: 'w-full h-full' },
 }
 
 function HeroChar({ char, index }) {
@@ -257,7 +257,7 @@ function HeroChar({ char, index }) {
         <motion.div
           whileHover={{ scale: 1.1 }}
           transition={{ type: 'spring', stiffness: 250 }}
-          className="relative flex items-center justify-center rounded-full shadow-2xl"
+          className="relative flex items-center justify-center rounded-full shadow-2xl overflow-hidden"
           style={{
             width: s.circle,
             height: s.circle,
@@ -270,7 +270,7 @@ function HeroChar({ char, index }) {
               src={char.src}
               alt={char.korName}
               onError={() => setImgError(true)}
-              className={`object-contain ${s.img}`}
+              className={`object-cover ${s.img}`}
               style={{ borderRadius: '50%' }}
             />
           ) : (

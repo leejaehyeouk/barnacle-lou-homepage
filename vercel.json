@@ -1,0 +1,14 @@
+{
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "/api/:path*" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "functions": {
+    "api/products.js": {
+      "maxDuration": 15
+    },
+    "api/contact.js": {
+      "maxDuration": 10
+    }
+  }
+}

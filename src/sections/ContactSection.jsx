@@ -100,7 +100,7 @@ export default function ContactSection() {
                 onChange={handleChange}
                 required
                 rows={5}
-                placeholder="문의 내용을 자유롭게 적어주세요 🐣"
+                  placeholder="문의 내용을 자유롭게 적어주세요."
                 className="border border-gray-200 rounded-xl px-4 py-3 text-sm font-body outline-none focus:border-lou transition-colors resize-none"
               />
             </div>
@@ -111,13 +111,13 @@ export default function ContactSection() {
               className="self-center font-body font-bold text-white px-10 py-3.5 rounded-full text-base shadow-md"
               style={{ backgroundColor: '#F0A820' }}
             >
-              보내기 🐣
+              보내기
             </motion.button>
           </motion.form>
         </div>
       </section>
       <Toast
-        message="문의가 성공적으로 전달되었어요! 빠르게 답변드릴게요 🐣"
+        message="문의가 성공적으로 전달되었어요! 빠르게 답변드릴게요."
         show={toast}
         onClose={() => setToast(false)}
       />
